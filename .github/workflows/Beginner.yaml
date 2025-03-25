@@ -1,0 +1,17 @@
+name: Hello World Workflow # Defines the name of the workflow.
+
+on:
+  push:
+    branches:
+      - main # Specifies that the workflow will trigger when code is pushed to the 'main' branch.
+
+jobs:
+  hello-world-job:
+    runs-on: ubuntu-latest # Defines the job named 'hello-world-job' and specifies it will run on the latest Ubuntu OS.
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3 # Step 1: Uses the 'checkout' action to fetch the repository's code.
+
+      - name: Say Hello
+        run: echo "Hello, World!" # Step 2: Executes the shell command to print "Hello, World!" to the console.
