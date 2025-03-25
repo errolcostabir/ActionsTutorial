@@ -1,0 +1,36 @@
+name: Lint README File
+# Defines the name of the workflow.
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+# Triggers the workflow on both pushes to the 'main' branch and pull requests targeting the 'main' branch.
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+# Defines the job named 'lint', which will execute on the latest Ubuntu environment.
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+# Step 1: Checks out the repository's code to make it accessible for the workflow.
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+# Step 2: Sets up Node.js with version 16, required for installing and running the Markdown linter.
+
+      - name: Install Markdown Linter
+        run: npm install -g markdownlint-cli
+# Step 3: Globally installs the `markdownlint-cli`, a popular tool for linting Markdown files.
+
+      - name: Lint README
+        run: markdownlint README.md
+# Step 4: Runs the `markdownlint` command on the `README.md` file to check for issues.
+# If the linter detects any issues, it outputs them and marks the workflow as failed.
